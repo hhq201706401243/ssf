@@ -1,17 +1,37 @@
-#include<stdio.h> 
-#define N 101 
-void main() 
-{ 
-int a[N]={0}, s,e,k,max; 
-scanf("%d",&k); 
-for(int i=1;i<=k;i++) 
-{ 
-scanf("%d%d",&s,&e); 
-for(;s<=e;s++) 
-a[s]++; 
-} 
-max=a[1]; 
-for(int i=2;i<=N;i++) 
-if(max<a[i])max=a[i]; 
-printf("%d",max); 
+#include <iostream.h>
+#include <algorithm>
+using namespace std;
+
+#define swap(i,j)   i=i+j;j=i-j;i=i-j;//交换
+
+int main(){
+
+    int a[] = {1,12,25,27,36};//开始
+    int b[] = {23,28,35,80,50};//结束
+    int n = 5, m = 0, count = 0;//排序
+    for (int i = 0; i < n; i++){
+        for (int j = i; j < n; j++){
+            if (b[i] > b[j]){   //结束时间提前的在前
+                swap(a[i],a[j]);
+                swap(b[i],b[j]);            
+            }
+        }
+    }
+
+    //安排
+    while (m != n){
+        int temp = 0;
+        for (int i = 0; i < n; i++){
+            if (a[i] >= temp){
+                temp = b[i];
+                a[i] = -1;
+                b[i] = -1;
+                m++;
+            }
+        }
+        count++;
+    }
+    printf("%d\n",count);
+
+    return 0;
 }
